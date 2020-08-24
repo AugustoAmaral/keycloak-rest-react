@@ -2,7 +2,7 @@ import { apiAddress, getUriParams, objectToForm } from "./functions";
 import oidConfig from "./oidConfig.json";
 
 const { scope, response_type, client_id, client_secret } = oidConfig;
-const url = "http://localhost:8080/auth/realms/test/protocol/openid-connect";
+const url = "http://localhost:8080/auth/realms/master/protocol/openid-connect";
 const redirect_uri = window.location.origin + window.location.pathname;
 
 const authenticate = () =>
