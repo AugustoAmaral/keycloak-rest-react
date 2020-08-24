@@ -1,0 +1,6 @@
+{
+  "scope": "openid",
+  "response_type": "code",
+  "client_id": "console",
+  "client_secret": "b3317b76-506f-45d0-87ee-8496dd43f36c"
+}
