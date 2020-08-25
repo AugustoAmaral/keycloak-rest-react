@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Username",
+    "dataIndex": "username",
+    "key": "username"
+  },
+  {
+    "title": "Name",
+    "dataIndex": "firstName",
+    "key": "firstName"
+  },
+  {
+    "title": "Last Name",
+    "dataIndex": "lastName",
+    "key": "lastName"
+  },
+  {
+    "title": "E-mail",
+    "dataIndex": "email",
+    "key": "email"
+  }
+]

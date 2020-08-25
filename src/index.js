@@ -5,10 +5,8 @@ import InitKeycloak from "./InitKeycloak";
 import "antd/dist/antd.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <InitKeycloak>
-      <App />
-    </InitKeycloak>
-  </React.StrictMode>,
+  <InitKeycloak>
+    <App />
+  </InitKeycloak>,
   document.getElementById("root")
 );
