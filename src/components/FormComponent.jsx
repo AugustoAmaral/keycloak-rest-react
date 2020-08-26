@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Switch } from "antd";
+import GroupsPicker from "./GroupsPicker";
+import RolesPicker from "./RolesPicker";
 
 const FormComponent = ({ error, entry, onSubmit }) => {
   const [values, setValues] = useState({
@@ -96,6 +98,22 @@ const FormComponent = ({ error, entry, onSubmit }) => {
       >
         <Switch />
       </Form.Item>
+      {entry && (
+        <>
+          <Form.Item
+            label="Groups"
+            help="Please, note this will be updated in real time"
+          >
+            <GroupsPicker id={entry.id} />
+          </Form.Item>
+          <Form.Item
+            label="Roles"
+            help="Please, note this will be updated in real time"
+          >
+            <RolesPicker id={entry.id} />
+          </Form.Item>
+        </>
+      )}
     </Form>
   );
 };
