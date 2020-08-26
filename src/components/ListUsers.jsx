@@ -10,7 +10,8 @@ const ListUsers = () => {
   useEffect(() => {
     fetchData({ url: "users" })
       .then((r) => r.json())
-      .then((res) => setUsers(res.map((e) => ({ ...e, key: e.id }))));
+      .then((res) => setUsers(res.map((e) => ({ ...e, key: e.id }))))
+      .catch(() => alert("Something went wrong, please refresh the page"));
   }, []);
 
   const [formOpen, setFormOpen] = useState(false);
@@ -43,6 +44,8 @@ const ListUsers = () => {
             )
           );
           return true;
+        } else {
+          alert("Something went wrong, please refresh the page");
         }
       });
     } else {
@@ -60,7 +63,7 @@ const ListUsers = () => {
               return true;
             });
         } else {
-          alert("Something went wrong");
+          alert("Something went wrong, please refresh the page");
           return false;
         }
       });
@@ -78,6 +81,9 @@ const ListUsers = () => {
           oldUsers.filter((user) => user.id !== selectedId)
         );
         return true;
+      } else {
+        alert("Something went wrong, please refresh the page");
+        return false;
       }
     });
   };
