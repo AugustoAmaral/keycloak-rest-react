@@ -50,8 +50,6 @@ const GroupsPicker = ({ userId }) => {
     }
   };
 
-  console.log("USER GROUPS", userGroups);
-
   useEffect(() => {
     Promise.all([
       fetchData({ url: "groups" })
