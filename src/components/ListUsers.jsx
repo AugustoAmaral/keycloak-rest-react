@@ -31,7 +31,6 @@ const ListUsers = () => {
   const handleSubmit = (data) => {
     if (selectedId) {
       //IF USER EXISTS, UPDATE IT
-      console.log(data);
       return fetchData({
         url: "users/" + selectedId,
         method: "PUT",
