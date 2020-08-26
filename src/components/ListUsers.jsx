@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Table, Button } from "antd";
 import fetchData from "../functions/fetchData";
 import columns from "../functions/tableColums.json";
 import DialogForm from "../components/DialogForm";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 const ListUsers = () => {
   const [users, setUsers] = useState([]);
@@ -92,6 +93,14 @@ const ListUsers = () => {
         }}
         dataSource={users}
         columns={columns}
+        footer={() => (
+          <Button
+            size="large"
+            icon={<PlusCircleOutlined />}
+            onClick={() => handleOpen()}
+          />
+        )}
+        pagination={false}
       />
       <DialogForm
         open={formOpen}
@@ -100,7 +109,6 @@ const ListUsers = () => {
         onDelete={handleDelete}
         onClose={handleClose}
       />
-      <button onClick={() => handleOpen()}>Add NEW</button>
     </>
   );
 };
