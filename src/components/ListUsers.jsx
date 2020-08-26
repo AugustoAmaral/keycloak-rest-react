@@ -30,6 +30,7 @@ const ListUsers = () => {
   const handleSubmit = (data) => {
     if (selectedId) {
       //IF USER EXISTS, UPDATE IT
+      console.log(data);
       return fetchData({
         url: "users/" + selectedId,
         method: "PUT",
@@ -37,7 +38,9 @@ const ListUsers = () => {
       }).then((response) => {
         if (response.status === 204) {
           setUsers((oldUsers) =>
-            oldUsers.map((user) => (user.id === data.id ? { ...data } : user))
+            oldUsers.map((user) =>
+              user.id === selectedId ? { ...user, ...data } : user
+            )
           );
           return true;
         }
@@ -50,8 +53,15 @@ const ListUsers = () => {
         body: data,
       }).then((response) => {
         if (response.status === 201) {
-          setUsers((oldUsers) => [...oldUsers, data]);
-          return true;
+          return fetchData({ url: "users" })
+            .then((r) => r.json())
+            .then((res) => {
+              setUsers(res.map((e) => ({ ...e, key: e.id })));
+              return true;
+            });
+        } else {
+          alert("Something went wrong");
+          return false;
         }
       });
     }

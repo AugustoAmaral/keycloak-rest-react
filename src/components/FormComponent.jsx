@@ -49,7 +49,7 @@ const FormComponent = ({ error, entry, onSubmit }) => {
           },
         ]}
       >
-        <Input required />
+        <Input disabled={entry} required />
       </Form.Item>
       <Form.Item
         name="firstName"
