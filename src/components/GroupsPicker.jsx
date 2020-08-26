@@ -70,7 +70,6 @@ const GroupsPicker = ({ userId }) => {
       onChange={handleChange}
       placeholder="Please select user groups"
       loading={loading}
-      disabled={loading}
     >
       {allGroups.map((opt) => (
         <Option key={opt.id} value={opt.id}>

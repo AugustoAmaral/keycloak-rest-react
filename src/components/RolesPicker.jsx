@@ -74,7 +74,6 @@ const RolesPicker = ({ userId }) => {
       onChange={handleChange}
       placeholder="Please select user roles"
       loading={loading}
-      disabled={loading}
     >
       {selectedOptions.map((opt) => (
         <Option key={opt.id} value={opt.id}>
