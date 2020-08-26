@@ -4,7 +4,7 @@ import fetchData from "../functions/fetchData";
 
 const { Option } = Select;
 
-const GroupsPicker = ({ id }) => {
+const GroupsPicker = ({ userId }) => {
   const [userGroups, setUserGroups] = useState([]);
   const [allGroups, setAllGroups] = useState([]);
 
@@ -14,13 +14,14 @@ const GroupsPicker = ({ id }) => {
     setLoading(true);
 
     if (options.length > userGroups.length) {
+      //ADD USER ON GROUP
       const userGroupIds = userGroups.map((e) => e.id);
       const newGroupId = options.find((opt) => !userGroupIds.includes(opt));
       const addedOption = allGroups.find((group) => group.id === newGroupId);
       fetchData({
-        url: "users/" + id + "/groups/" + newGroupId,
+        url: "users/" + userId + "/groups/" + newGroupId,
         method: "PUT",
-        body: { realm: "sample", userId: id, groupId: newGroupId },
+        body: { realm: "sample", userId: userId, groupId: newGroupId },
       }).then((r) => {
         if (r.status === 204) {
           setUserGroups((oldOptions) => [...oldOptions, addedOption]);
@@ -30,11 +31,11 @@ const GroupsPicker = ({ id }) => {
         }
       });
     } else {
-      // delete group
+      // REMOVE USER FROM GROUP
       const removedOption = userGroups.find((opt) => !options.includes(opt.id));
 
       fetchData({
-        url: "users/" + id + "/groups/" + removedOption.id,
+        url: "users/" + userId + "/groups/" + removedOption.id,
         method: "DELETE",
       }).then((r) => {
         if (r.status === 204) {
@@ -55,12 +56,12 @@ const GroupsPicker = ({ id }) => {
     Promise.all([
       fetchData({ url: "groups" })
         .then((r) => r.json())
-        .then((res) => setAllGroups(res)),
-      fetchData({ url: "users/" + id + "/groups" })
+        .then((res) => setAllGroups(res)), //STORE ALL USERS INSIDE HOOK
+      fetchData({ url: "users/" + userId + "/groups" })
         .then((r) => r.json())
-        .then((res) => setUserGroups(res)),
+        .then((res) => setUserGroups(res)), //STORE ALL USERS INSIDE HOOK (too)
     ]).then(() => setLoading(false));
-  }, [id]);
+  }, [userId]);
 
   return (
     <Select

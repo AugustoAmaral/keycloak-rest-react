@@ -4,7 +4,7 @@ import fetchData from "../functions/fetchData";
 
 const { Option } = Select;
 
-const RolesPicker = ({ id }) => {
+const RolesPicker = ({ userId }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [avaliableOptions, setAvaliableOptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,12 +12,13 @@ const RolesPicker = ({ id }) => {
   const handleChange = (options) => {
     setLoading(true);
 
+    //THIS WILL CHECK IF USER IS ADDING NEW ROLE
     if (options.length > selectedOptions.length) {
       const addedOption = avaliableOptions.find((opt) =>
         options.includes(opt.id)
-      );
+      ); //FIND ROLE OBJECT
       fetchData({
-        url: "users/" + id + "/role-mappings/realm",
+        url: "users/" + userId + "/role-mappings/realm",
         method: "POST",
         body: [addedOption],
       }).then((r) => {
@@ -38,7 +39,7 @@ const RolesPicker = ({ id }) => {
       );
 
       fetchData({
-        url: "users/" + id + "/role-mappings/realm",
+        url: "users/" + userId + "/role-mappings/realm",
         method: "DELETE",
         body: [removedOption],
       }).then((r) => {
@@ -57,14 +58,14 @@ const RolesPicker = ({ id }) => {
 
   useEffect(() => {
     Promise.all([
-      fetchData({ url: "users/" + id + "/role-mappings/realm/available" })
+      fetchData({ url: "users/" + userId + "/role-mappings/realm/available" })
         .then((r) => r.json())
         .then((res) => setAvaliableOptions(res)),
-      fetchData({ url: "users/" + id + "/role-mappings/realm" })
+      fetchData({ url: "users/" + userId + "/role-mappings/realm" })
         .then((r) => r.json())
         .then((res) => setSelectedOptions(res)),
     ]).then(() => setLoading(false));
-  }, [id]);
+  }, [userId]);
 
   return (
     <Select

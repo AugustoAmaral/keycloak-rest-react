@@ -104,13 +104,13 @@ const FormComponent = ({ error, entry, onSubmit }) => {
             label="Groups"
             help="Please, note this will be updated in real time"
           >
-            <GroupsPicker id={entry.id} />
+            <GroupsPicker userId={entry.id} />
           </Form.Item>
           <Form.Item
             label="Roles"
             help="Please, note this will be updated in real time"
           >
-            <RolesPicker id={entry.id} />
+            <RolesPicker userId={entry.id} />
           </Form.Item>
         </>
       )}

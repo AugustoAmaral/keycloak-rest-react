@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import fetchData from "../functions/fetchData";
 import columns from "../functions/tableColums.json";
-import DialogForm from "../components/ConnectedDialogForm";
+import DialogForm from "../components/DialogForm";
 
 const ListUsers = () => {
   const [users, setUsers] = useState([]);
@@ -29,6 +29,7 @@ const ListUsers = () => {
 
   const handleSubmit = (data) => {
     if (selectedId) {
+      //IF USER EXISTS, UPDATE IT
       return fetchData({
         url: "users/" + selectedId,
         method: "PUT",
@@ -42,6 +43,7 @@ const ListUsers = () => {
         }
       });
     } else {
+      //ELSE, CREATE A NEW ONE
       return fetchData({
         url: "users",
         method: "POST",
@@ -56,6 +58,7 @@ const ListUsers = () => {
   };
 
   const handleDelete = () => {
+    //DELETE USER
     return fetchData({
       url: "users/" + selectedId,
       method: "DELETE",
